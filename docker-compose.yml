@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  producer:
+    build: ./src/producer
+    networks:
+      - msgnet
+  consumer:
+    build: ./src/consumer
+    networks:
+      - msgnet
+  logger:
+    build: ./src/logger
+    networks:
+      - msgnet
+    volumes:
+      - ./data:/data
+networks:
+  msgnet:
+    external: true
