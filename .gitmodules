@@ -1,3 +1,6 @@
 [submodule "src/producer/malwares"]
 	path = src/producer/malwares
 	url = https://github.com/upenetworkdataset/preprocessing
+[submodule "src/producer/synthetic-malwares"]
+	path = src/producer/synthetic-malwares
+	url = https://github.com/upenetworkdataset/synthetic-malwares
