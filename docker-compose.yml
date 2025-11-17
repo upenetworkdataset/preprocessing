@@ -1,19 +1,40 @@
-version: '3.8'
 services:
   producer:
     build: ./src/producer
     networks:
       - msgnet
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    
   consumer:
     build: ./src/consumer
     networks:
       - msgnet
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    
   logger:
     build: ./src/logger
     networks:
       - msgnet
     volumes:
       - ./data:/data
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    
 networks:
   msgnet:
-    external: true
+    driver: bridge
+    internal: true  # Isolate from external networks
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
